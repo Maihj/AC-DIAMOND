@@ -1,0 +1,7 @@
+*/*~
+*/*/*.h~
+*/*/*.o
+*/*/*.cpp~
+*/*.o
+src/boost*/
+src/boost*.gz

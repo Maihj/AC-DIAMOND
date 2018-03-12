@@ -1,0 +1,133 @@
+/****
+AC-DIAMOND: DNA-protein alignment tool
+Copyright (C) 2018 Huijun Mai
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+****/
+
+#ifndef OPTIONS_H_
+#define OPTIONS_H_
+
+#include <stdint.h>
+#include <string>
+
+using std::string;
+
+namespace program_options
+{
+	extern string	input_ref_file;
+	extern uint32_t	threads_;
+	extern string	database;
+	extern string	query_file;
+	extern uint32_t	merge_seq_treshold;
+	extern uint32_t	block_size;
+	extern uint32_t	hit_cap;
+	extern int		min_ungapped_raw_score;
+	extern uint32_t shapes;
+	extern uint32_t	index_mode;
+	extern uint64_t	max_alignments;
+	extern string	match_file1;
+	extern string	match_file2;
+	extern int		padding;
+	extern uint32_t	output_threads;
+	extern uint32_t compression;
+	extern double	chunk_size;
+	extern double   query_chunk_size;
+	extern unsigned min_identities;
+	extern unsigned min_identities2;
+	extern int		xdrop;
+	extern unsigned window;
+	extern int		min_hit_score;
+	extern int		hit_band;
+	extern unsigned	min_compressed_identities;
+	extern int		min_seed_score;
+	extern unsigned	seed_signatures;
+	extern double	min_bit_score;
+	extern unsigned	run_len;
+	extern bool		alignment_traceback;
+	extern double	max_seed_freq;
+	extern string	tmpdir;
+	extern bool		long_mode;
+	extern int		gapped_xdrop;
+	extern double	max_evalue;
+	extern string	kegg_file;
+	extern int		gap_open;
+	extern int		gap_extend;
+	extern string	matrix;
+	extern string	seg;
+	extern bool		verbose;
+	extern bool		debug_log;
+	extern bool		have_ssse3;
+	extern bool		salltitles;
+	extern int		reward;
+	extern int		penalty;
+	extern string	db_type;
+	extern double	min_id;
+	extern unsigned	compress_temp;
+	extern double	toppercent;
+	extern string	daa_file;
+	extern string	output_format;
+	extern string	output_file;
+	extern bool		forwardonly;
+	extern unsigned fetch_size;
+	extern bool		single_domain;
+
+	typedef enum { fast=0, sensitive=1, very_sensitive=2 } Aligner_mode;
+	extern Aligner_mode aligner_mode;
+	typedef enum { invalid=0, makedb=1, blastp=2, align=3, blastn=4, view=5 } Command;
+	extern Command command;
+
+	inline uint32_t threads()
+	{
+		return std::max(threads_, 1U);
+	}
+
+	template<typename _t>
+	inline void set_option(_t& option, _t value)
+	{
+		if(option == 0)
+			option = value;
+	}
+
+	template<typename _val>
+	void set_options(double block_size);
+	template<typename _val>
+	unsigned read_padding(size_t len);
+	string get_temp_file();
+	bool mem_buffered();
+
+	inline unsigned get_run_len(unsigned length)
+	{
+		if(run_len == 0) {
+			if(length < 30)
+				return 1;
+			else if(length < 100)
+				return 20;
+			else
+				return 40;
+		} else
+			return run_len;
+	}
+
+	inline bool output_range(unsigned n_target_seq, int score, int top_score)
+	{
+		if(toppercent < 100)
+			return (1.0-(double)score/top_score)*100 <= toppercent;
+		else
+			return n_target_seq < max_alignments;
+	}
+
+}
+
+#endif /* OPTIONS_H_ */
