@@ -20,12 +20,12 @@ Installation
 
 Getting Started
 ===============
-::
-build index: ./ac-diamond makedb --in nr.fa -d nr
 
-align: ./ac-diamond align -d nr -q query.fa -a matches -t <temporary directory>
+    1. build index: ./ac-diamond makedb --in nr.fa -d nr
 
-view the alignments in blast format: ./ac-diamond view -a matches.daa -o matches.m8
+    2. align: ./ac-diamond align -d nr -q query.fa -a matches -t <temporary directory>
+
+    3. view alignment results in blast format: ./ac-diamond view -a matches.daa -o matches.m8
 
 Commands
 ========
