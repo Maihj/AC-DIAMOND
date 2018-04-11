@@ -37,5 +37,8 @@ ac-diamond : $(OBJS)
 
 all : ac-diamond
 
+install :
+	cp ../bin/ac-diamond /usr/local/bin/
+
 clean :
 	rm $(OBJS) ../bin/ac-diamond

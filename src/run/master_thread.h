@@ -757,7 +757,7 @@ void run_ref_chunk_fast(Database_file<_val> &db_file,
   unsigned max_seq_len = query_len_bounds.second;
 
   string file_prefix = program_options::database.substr(0,program_options::database.size()-5) + "_" + to_string(ref_chunk) + ".index";
-  FILE *f = fopen64(file_prefix.c_str(), "rb");
+  FILE *f = fopen(file_prefix.c_str(), "rb");
 
   unsigned *sa;
   unsigned *table;
@@ -873,7 +873,7 @@ void run_ref_chunk_long(Database_file<_val> &db_file,
   unsigned max_seq_len = query_len_bounds.second;
 
   string file_prefix = program_options::database.substr(0,program_options::database.size()-5) + "_" + to_string(ref_chunk) + ".index";
-  FILE *f = fopen64(file_prefix.c_str(), "rb");
+  FILE *f = fopen(file_prefix.c_str(), "rb");
   
   unsigned *sa_4bytes;
   uint8_t *sa_1byte;
@@ -994,7 +994,7 @@ void run_ref_chunk_sensitive(Database_file<_val> &db_file,
   unsigned max_seq_len = query_len_bounds.second;
 
   string file_prefix = program_options::database.substr(0,program_options::database.size()-5) +	"_" + to_string(ref_chunk) + ".index";
-  FILE *f = fopen64(file_prefix.c_str(), "rb");
+  FILE *f = fopen(file_prefix.c_str(), "rb");
 
   unsigned *sa;
   unsigned *table;

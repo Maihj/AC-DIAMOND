@@ -42,7 +42,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define N_PATTERN 9
 #define OFFSET 6
 
-using namespace __gnu_cxx;
+//using namespace __gnu_cxx;
 using boost::timer::cpu_timer;
 using std::cout;
 using std::endl;
@@ -107,10 +107,10 @@ void store_to_file_long(unsigned id,
 			const char *filename){
   FILE *f;
   if (id == 0){
-    f = fopen64(filename, "wb");
+    f = fopen(filename, "wb");
   }
   else {
-    f = fopen64(filename, "ab");
+    f = fopen(filename, "ab");
   }
   
   task_timer timer ("Building the hash table", true);
@@ -186,10 +186,10 @@ void store_to_file(unsigned id,
 		   const char *filename){
   FILE *f;
   if (id == 0){
-    f = fopen64(filename, "wb");
+    f = fopen(filename, "wb");
   }
   else {
-    f = fopen64(filename, "ab");
+    f = fopen(filename, "ab");
   }
   
   task_timer timer ("Building the hash table", true);
