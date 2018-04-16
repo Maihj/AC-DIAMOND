@@ -1,7 +1,7 @@
 WARN=-Wall -Wno-uninitialized
 C=gcc
 CXX=g++
-CFLAGS=-O3 -DNDEBUG
+CFLAGS=-O3 -DNDEBUG -msse4.1
 CXXFLAGS=-O3 -DNDEBUG -Iboost/include $(WARN) -Iinclude
 
 ifneq ($(wildcard boost/.),)
