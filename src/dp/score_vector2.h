@@ -21,9 +21,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #ifdef __SSSE3__
 #include <tmmintrin.h>
-#include <smmintrin.h>
 #include <emmintrin.h>
 #endif
+
+#include <smmintrin.h>
 
 #include "../basic/score_matrix.h"
 

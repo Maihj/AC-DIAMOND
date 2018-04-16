@@ -382,7 +382,7 @@ void process(unsigned *sa,
     
   }
 
-  delete query_reduced_aa;
+  delete []query_reduced_aa;
   delete out;
   return;
 }
@@ -571,7 +571,7 @@ void process_long(unsigned *sa_4bytes,
 
   }
 
-  delete query_reduced_aa;
+  delete []query_reduced_aa;
   delete out;
   return;
 }
