@@ -77,6 +77,7 @@ int main(int ac, const char* av[])
             ("threads,p", po::value<uint32_t>(&program_options::threads_)->default_value(0), "number of cpu threads")
             ("db,d", po::value<string>(&program_options::database), "database file")
             ("daa,a", po::value<string>(&program_options::daa_file), "AC-DIAMOND alignment archive (DAA) file")
+	    ("sensitive", "enable sensitive mode (default: fast)")
 	    ("verbose,v", "enable verbose out")
             ("log", "enable debug log");
 
@@ -84,7 +85,6 @@ int main(int ac, const char* av[])
         makedb.add_options()
 	  ("in", po::value<string>(&program_options::input_ref_file), "input reference file in FASTA format")
 	  ("block-size,b", po::value<double>(&program_options::chunk_size), "reference sequence block size in billions of letters (default=4)")
-	  ("sensitive", "enable building index for sensitive mode (default:fast)")
 #ifdef EXTRA
 	  ("dbtype", po::value<string>(&program_options::db_type), "database type (nucl/prot)")
 #endif
@@ -101,7 +101,6 @@ int main(int ac, const char* av[])
 	        ("evalue,e", po::value<double>(&program_options::max_evalue)->default_value(0.001), "maximum e-value to report alignments")
         	("min-score", po::value<double>(&program_options::min_bit_score)->default_value(0), "minimum bit score to report alignments (overrides e-value setting)")
         	("id", po::value<double>(&program_options::min_id)->default_value(0), "minimum identity% to report an alignment")
-        	("sensitive", "enable sensitive mode (default: fast)")
         	("tmpdir,t", po::value<string>(&program_options::tmpdir)->default_value("/dev/shm"), "directory for temporary files")
         	("gapopen", po::value<int>(&program_options::gap_open)->default_value(-1), "gap open penalty, -1=default (11 for protein)")
         	("gapextend", po::value<int>(&program_options::gap_extend)->default_value(-1), "gap extension penalty, -1=default (1 for protein)")
