@@ -164,7 +164,11 @@ struct score_matrix
 
 private:
 
-	static const double	LN_2 = 0.69314718055994530941723212145818;
+	#if __GNUC__ > 5
+	static constexpr double LN_2 = 0.69314718055994530941723212145818;
+	#else
+	static const double     LN_2 = 0.69314718055994530941723212145818;
+	#endif
 
 	template<typename _t>
 	struct Scores
