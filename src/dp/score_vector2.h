@@ -39,12 +39,18 @@ Author: Benjamin Buchfink
 #ifndef SCORE_VECTOR2_H_
 #define SCORE_VECTOR2_H_
 
-#ifdef __SSSE3__
-#include <tmmintrin.h>
-#include <emmintrin.h>
-#endif
+#ifdef __x86_64__
+ #ifdef __SSSE3__
+  #include <tmmintrin.h>
+  #include <emmintrin.h>
+ #endif
 
-#include <smmintrin.h>
+ #include <smmintrin.h>
+#elif __aarch64__
+ #include "../sse2neon.h"
+#endif
+ 
+-#include <smmintrin.h>
 
 #include "../basic/score_matrix.h"
 

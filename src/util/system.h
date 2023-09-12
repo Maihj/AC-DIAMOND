@@ -21,6 +21,14 @@ Author: Benjamin Buchfink
 #ifndef SYSTEM_H_
 #define SYSTEM_H_
 
+#ifdef __aarch64__
+bool check_SSSE3()
+{
+    return false;
+}
+
+#else
+
 #ifdef _WIN32
 #define cpuid(info,x)    __cpuidex(info,x,0)
 #else
@@ -48,4 +56,5 @@ bool check_SSSE3()
     return false;
 }
 
+#endif /* __aarch64__ */
 #endif /* SYSTEM_H_ */

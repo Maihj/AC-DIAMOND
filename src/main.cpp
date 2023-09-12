@@ -48,6 +48,10 @@ Author: Benjamin Buchfink
 #include "basic/setup.h"
 #include "output/view.h"
 
+#ifdef __aarch64__
+#include "sse2neon.h"
+#endif
+
 #ifdef EXTRA
 #include "../../extra/test_sw.h"
 #include "../../extra/test_io.h"

@@ -51,6 +51,10 @@ Author: Benjamin Buchfink
 #include <emmintrin.h>
 #endif
 
+#ifdef __aarch64__
+#include "sse2neon.h"
+#endif
+
 #include <vector>
 #include <boost/thread.hpp>
 #include <sys/stat.h>
