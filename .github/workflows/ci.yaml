@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    name: Build on Linux x86_64
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libboost-all-dev file
+
+    - name: Build
+      run: |
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_CXX_FLAGS="-msse4.1 -Wno-narrowing -Wno-unused-result"
+        make -j all
+        file ac-diamond | grep x86-64
+
+  build-aarch64:
+    name: Build on Linux aarch64
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Build
+      uses: uraimo/run-on-arch-action@v2
+      with:
+        arch: aarch64
+        distro: ubuntu20.04
+        githubToken: ${{ github.token }}
+        dockerRunArgs: |
+          --volume "${PWD}:/ac-diamond"
+        install: |
+          apt-get update -q -y
+          apt-get install -q -y cmake gcc g++ libboost-all-dev file
+        run: |
+          cd /ac-diamond
+          mkdir build
+          cd build
+          cmake ..
+          make -j all
+          file ac-diamond | grep aarch64
