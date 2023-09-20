@@ -50,8 +50,6 @@ Author: Benjamin Buchfink
  #include "../sse2neon.h"
 #endif
  
--#include <smmintrin.h>
-
 #include "../basic/score_matrix.h"
 
 template<typename _score>
